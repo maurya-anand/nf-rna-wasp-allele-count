@@ -6,7 +6,7 @@ All notable changes to this project will be documented in this file.
 
 ### Release Notes
 
-- Initial release of MethylPredict, a Nextflow pipeline to perform allele-specific expression analysis from RNA-seq data using a WASP-aware alignment strategy.
+- Initial release of nf-rna-wasp-allele-count, a Nextflow pipeline to perform allele-specific expression analysis from RNA-seq data using a WASP-aware alignment strategy.
 - Implements modular Nextflow DSL2 workflow with sample-wise output organization.
 - Major features:
   - Genotype-aware RNA-seq alignment with **STAR + WASP correction**.
