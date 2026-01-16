@@ -3,8 +3,8 @@ process ALLELE_COUNT{
 
     input:
     tuple val(meta), path(bam), path(bai)
-    path(params.reference_fa)
-    path (params.regions_vcf)
+    path reference_fa
+    path regions_vcf
 
     output:
     tuple val(meta.sampleid),
@@ -17,9 +17,9 @@ process ALLELE_COUNT{
     """
     set -euo pipefail
 
-    [[ -f "${params.reference_fa}.fai" ]] || samtools faidx ${params.reference_fa}
+    [[ -f "${reference_fa}.fai" ]] || samtools faidx ${reference_fa}
 
-    bgzip -c ${params.regions_vcf} > sites.vcf.gz
+    bgzip -c ${regions_vcf} > sites.vcf.gz
 
     tabix -p vcf sites.vcf.gz
 
@@ -27,7 +27,7 @@ process ALLELE_COUNT{
         > ${meta.sampleid}.allele_counts.with_qual_and_vaf.tsv
     
     bcftools mpileup \\
-        -f ${params.reference_fa} \\
+        -f ${reference_fa} \\
         -R sites.vcf.gz \\
         -a FORMAT/AD,FORMAT/DP,INFO/MQ,INFO/QS,INFO/QSsum \\
         -Q 20 -q 20 \\
