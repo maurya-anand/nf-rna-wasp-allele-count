@@ -127,6 +127,10 @@ The pipeline consists of the following main steps:
     - Computes variant allele fraction (VAF = ALT / (REF + ALT)).
   - Output: `sampleID.allele_counts.with_qual_and_vaf.tsv.gz`
 
+- Summary (REPORT)
+  - Generates a report using multiqc.
+  - Output: `multiqc_report.html`
+
 ## Customization
 
 Resource requirements, containers, and execution profiles can be adjusted in:

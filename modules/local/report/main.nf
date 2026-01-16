@@ -5,7 +5,8 @@ process REPORT {
     path '*'
 
     output:
-    path "multiqc_report.html"
+    path "multiqc_report.html", emit: report
+    path "multiqc_data", emit: data
 
     script:
     """
