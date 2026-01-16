@@ -35,14 +35,9 @@ sampleID,sampleID_1.fastq.gz,sampleID_2.fastq.gz
 
 ### 2. Download reference data
 
-Phased 1000 Genomes VCFs
+Download the high-coverage phased WGS VCFs an store all the files in a directory:
 
-Download the high-coverage phased WGS VCFs:
-
-```bash
 https://ftp.1000genomes.ebi.ac.uk/vol1/ftp/data_collections/1000G_2504_high_coverage/working/20201028_3202_phased
-
-```
 
 Expected output:
 
@@ -57,9 +52,10 @@ Expected output:
 ### 3. Reference genome and annotation
 
 ```bash
+mkdir reference
+cd reference
 wget https://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_38/gencode.v38.annotation.gtf.gz
 gunzip gencode.v38.annotation.gtf.gz
-
 wget https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/000/001/405/GCA_000001405.15_GRCh38/seqs_for_alignment_pipelines.ucsc_ids/GCA_000001405.15_GRCh38_no_alt_analysis_set.fna.gz
 gunzip GCA_000001405.15_GRCh38_no_alt_analysis_set.fna.gz
 ```
