@@ -20,6 +20,8 @@ Dylan J. Taylor, Surya B. Chhetri, Michael G. Tassia, Arjun Biddanda, Stephanie 
 
 - Nextflow **≥ 22.10.0**
 - Singularity / Apptainer or Docker (or compatible container runtime)
+- Phased VCFs for each sample (e.g., 1000G high-coverage release)
+- Reference genome FASTA + GTF matching alignment build
 
 ## Quick Start
 
@@ -117,11 +119,10 @@ The pipeline consists of the following main steps:
   - Output: sampleID.1KGP.snps.het.vcf.gz
 
 - Alignment with WASP correction (STAR_ALIGNMENT_WASP)
-  - Aligns paired-end RNA-seq reads using STAR.
+  - Aligns reads using STAR with genotype-aware variant input
+  - Applies WASP correction to mitigate reference mapping bias
   - Uses per-sample phased variants via `--varVCFfile`.
-  - Enables WASP correction to eliminate reference allele mapping bias.
-  - Produces coordinate-sorted BAM files.
-  - Output: sampleID.Aligned.sortedByCoord.out.bam
+  - Outputs coordinate sorted BAM files with WASP tags
 
 - Allele-specific read counting (ALLELE_COUNT)
   - Uses bcftools mpileup restricted to SNPs of interest.
