@@ -29,7 +29,7 @@ process SUBSET_1KGP_VCF {
         } > list.txt
 
         bcftools concat -f list.txt -Ou \\
-        | bcftools sort -Oz -o ${meta.sampleid}.1KGP.snps.het.vcf.gz
+        | bcftools sort --temp-dir ./ -Oz -o ${meta.sampleid}.1KGP.snps.het.vcf.gz
 
         tabix -p vcf ${meta.sampleid}.1KGP.snps.het.vcf.gz
     else
