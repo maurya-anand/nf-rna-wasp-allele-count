@@ -5,8 +5,7 @@ A Nextflow DSL2 pipeline to perform allele-specific expression analysis from RNA
 > [!NOTE]
 > This pipeline adopts the genotype-aware alignment strategy used in:
 >
-> Sources of gene expression variation in a globally diverse human cohort
-Dylan J. Taylor, Surya B. Chhetri, Michael G. Tassia, Arjun Biddanda, Stephanie M. Yan, Genevieve L. Wojcik, Alexis Battle, Rajiv C. McCoy
+> Taylor DJ, Chhetri SB, Tassia MG, et al. *Sources of gene expression variation in a globally diverse human cohort.* **Nature** 632, 122–130 (2024). https://doi.org/10.1038/s41586-024-07708-2
 >
 > This workflow uses STAR alignment with WASP correction to prevent reference-mapping bias at heterozygous sites. While the original study focused on regulatory and splicing variation, this pipeline extends the same alignment principles to explicit allele-specific read counting from RNA-seq data.
 
