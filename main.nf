@@ -28,8 +28,8 @@ workflow {
     align_in_ch = vcf_ch.subset_phased_vcf
         .join(reads_ch_rekeyed)
         .combine(star_idx_ch.star_index_dir)
-        .map { _sampleid, vcf, vcf_idx, meta, _vcf_dir, star_dir ->
-            [ meta, vcf, vcf_idx, star_dir, meta.fastq_1, meta.fastq_2 ]
+        .map { _sampleid, vcf, meta, _vcf_dir, star_dir ->
+            [ meta, vcf, star_dir, meta.fastq_1, meta.fastq_2 ]
         }
     ac_in_ch = STAR_ALIGNMENT_WASP(align_in_ch)
     ALLELE_COUNT(

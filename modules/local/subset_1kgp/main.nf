@@ -2,7 +2,7 @@ process SUBSET_1KGP_VCF {
     input:
     tuple val(meta), path(phased_vcf_dir)
     output:
-    tuple val(meta.sampleid), path("${meta.sampleid}.1KGP.snps.het.vcf.gz"), path("${meta.sampleid}.1KGP.snps.het.vcf.gz.tbi"), emit: subset_phased_vcf
+    tuple val(meta.sampleid), path("${meta.sampleid}.1KGP.snps.het.vcf"), emit: subset_phased_vcf
     script:
     """
     total_threads=${task.cpus}
@@ -29,13 +29,11 @@ process SUBSET_1KGP_VCF {
         } > list.txt
 
         bcftools concat -f list.txt -Ou \\
-        | bcftools sort --temp-dir ./ -Oz -o ${meta.sampleid}.1KGP.snps.het.vcf.gz
+        | bcftools sort --temp-dir ./ -Ov -o ${meta.sampleid}.1KGP.snps.het.vcf
 
-        tabix -p vcf ${meta.sampleid}.1KGP.snps.het.vcf.gz
     else
         echo "Phased VCF dir is empty. Creating empty output files."
-        touch ${meta.sampleid}.1KGP.snps.het.vcf.gz
-        touch ${meta.sampleid}.1KGP.snps.het.vcf.gz.tbi
+        touch ${meta.sampleid}.1KGP.snps.het.vcf
     fi
     """
 }
