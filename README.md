@@ -13,7 +13,7 @@ A Nextflow DSL2 pipeline to perform allele-specific expression analysis from RNA
 
 - Genotype-aware RNA-seq alignment with **STAR + WASP correction**.
 - Allele-specific read counting (REF/ALT) from RNA-seq BAMs.
-- Reporting of depth, mapping quality, base-quality summaries, and VAF.
+- Reports total depth and variant allele fraction.
 
 ## Requirements
 
@@ -124,8 +124,6 @@ The pipeline consists of the following main steps:
   - Reports:
     - Total depth (DP)
     - REF and ALT read counts (AD)
-    - Mean mapping quality (MQ)
-    - Base-quality–weighted summaries (QS, QSsum)
     - Computes variant allele fraction (VAF = ALT / (REF + ALT)).
   - Output: `sampleID.allele_counts.with_qual_and_vaf.tsv.gz`
 
