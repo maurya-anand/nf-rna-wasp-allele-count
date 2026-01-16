@@ -1,14 +1,18 @@
 process ALLELE_COUNT{
+    publishDir "${params.outdir}/${meta.sampleid}/allele_counts", mode: 'copy'
+
     input:
     tuple val(meta), path(bam), path(bai)
     path(params.reference_fa)
     path (params.regions_vcf)
+
     output:
     tuple val(meta.sampleid),
         path("${meta.sampleid}.allele_counts.with_qual.tsv"),
         path("${meta.sampleid}.allele_counts.with_qual.tsv.gz"),
         path("${meta.sampleid}.allele_counts.with_qual.tsv.gz.tbi"),
         emit: allele_counts
+
     script:
     """
     set -euo pipefail
