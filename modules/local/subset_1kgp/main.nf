@@ -1,8 +1,12 @@
 process SUBSET_1KGP_VCF {
+    publishDir "${params.outdir}/${meta.sampleid}/extracted_1KGP_het_snps", mode: 'copy'
+
     input:
     tuple val(meta), path(phased_vcf_dir)
+
     output:
     tuple val(meta.sampleid), path("${meta.sampleid}.1KGP.snps.het.vcf"), emit: subset_phased_vcf
+
     script:
     """
     total_threads=${task.cpus}
