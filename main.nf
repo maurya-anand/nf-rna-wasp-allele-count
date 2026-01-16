@@ -33,8 +33,8 @@ workflow {
     ac_in_ch = STAR_ALIGNMENT_WASP(align_in_ch)
     ALLELE_COUNT(
         ac_in_ch.bam,
-        channel.fromPath(params.reference_fa),
-        channel.fromPath(params.regions_vcf)
+        file(params.reference_fa),
+        file(params.regions_vcf)
     )
     report_in_ch = channel.empty()
     report_in_ch = report_in_ch.mix(ac_in_ch.log.map { _meta, log_file -> log_file })
