@@ -6,6 +6,7 @@ process STAR_ALIGNMENT_WASP {
 
     output:
     tuple val(meta), path("${meta.sampleid}.Aligned.sortedByCoord.out.bam"), path("${meta.sampleid}.Aligned.sortedByCoord.out.bam.bai"), emit: bam
+    tuple val(meta), path("${meta.sampleid}.samtools_stats.txt"), emit: stats
     tuple val(meta), path("${meta.sampleid}.Log.final.out"), emit: log
     tuple val(meta), path("${meta.sampleid}.SJ.out.tab"), emit: sj_out
 
@@ -52,5 +53,6 @@ process STAR_ALIGNMENT_WASP {
     --genomeLoad NoSharedMemory
 
     samtools index ${meta.sampleid}.Aligned.sortedByCoord.out.bam
+    samtools stats ${meta.sampleid}.Aligned.sortedByCoord.out.bam > ${meta.sampleid}.samtools_stats.txt
     """
 }
