@@ -5,7 +5,7 @@ A Nextflow DSL2 pipeline to perform allele-specific expression analysis from RNA
 > [!NOTE]
 > This pipeline adopts the genotype-aware alignment strategy used in:
 >
-> Taylor DJ, Chhetri SB, Tassia MG, et al. *Sources of gene expression variation in a globally diverse human cohort.* **Nature** 632, 122–130 (2024). https://doi.org/10.1038/s41586-024-07708-2
+> Taylor DJ, Chhetri SB, Tassia MG, et al. *Sources of gene expression variation in a globally diverse human cohort.* **Nature** 632, 122–130 (2024). <https://doi.org/10.1038/s41586-024-07708-2>
 >
 > This workflow uses STAR alignment with WASP correction to prevent reference-mapping bias at heterozygous sites. While the original study focused on regulatory and splicing variation, this pipeline extends the same alignment principles to explicit allele-specific read counting from RNA-seq data.
 
@@ -37,7 +37,7 @@ sampleID,sampleID_1.fastq.gz,sampleID_2.fastq.gz
 
 Download the high-coverage phased WGS VCFs an store all the files in a directory:
 
-https://ftp.1000genomes.ebi.ac.uk/vol1/ftp/data_collections/1000G_2504_high_coverage/working/20201028_3202_phased
+<https://ftp.1000genomes.ebi.ac.uk/vol1/ftp/data_collections/1000G_2504_high_coverage/working/20201028_3202_phased>
 
 Expected output:
 
@@ -138,6 +138,8 @@ Resource requirements, containers, and execution profiles can be adjusted in:
 
 ## Components
 
+Tools:
+
 | Component | Version |
 |-----------|---------|
 | STAR      | 2.7.11b |
@@ -145,5 +147,6 @@ Resource requirements, containers, and execution profiles can be adjusted in:
 | BCFTOOLS  | 1.23    |
 | TABIX     | 1.11    |
 
-Container Image
+Container Image:
+
 - `community.wave.seqera.io/library/bcftools_samtools_star_tabix:e294cd9e3fb171ce`
