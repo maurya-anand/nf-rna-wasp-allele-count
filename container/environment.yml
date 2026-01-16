@@ -8,4 +8,5 @@ dependencies:
 - samtools<=1.21
 - bcftools<=1.23
 - tabix<=1.11
+- multiqc<=1.33
 
