@@ -22,10 +22,13 @@ workflow {
             [ meta, file(params.phased_vcf_dir) ]
         }
     vcf_ch = SUBSET_1KGP_VCF(reads_ch)
+
+    reads_ch_rekeyed = reads_ch.map { meta, vcf_dir -> [ meta.sampleid, meta, vcf_dir ] }
+
     align_in_ch = vcf_ch.subset_phased_vcf
-        .join(reads_ch)
+        .join(reads_ch_rekeyed)
         .combine(star_idx_ch.star_index_dir)
-        .map { meta, vcf, vcf_idx, _vcf_dir, star_dir ->
+        .map { _sampleid, vcf, vcf_idx, meta, _vcf_dir, star_dir ->
             [ meta, vcf, vcf_idx, star_dir ]
         }
     ac_in_ch = STAR_ALIGNMENT_WASP(align_in_ch)
