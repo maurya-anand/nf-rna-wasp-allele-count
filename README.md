@@ -106,18 +106,18 @@ The pipeline consists of the following main steps:
 - Genome index generation (STAR_GENOME_INDEX)
   - Builds a STAR genome index from GRCh38 and GENCODE v38.
   - Executed once and reused across all samples.
-  - Output: STAR_INDEX/
+  - Output: `STAR_INDEX/`
 
 - Extraction of phased variants (SUBSET_1KGP_VCF)
   - Subsets 1000 Genomes phased WGS VCFs to a single sample.
   - Extracts biallelic heterozygous SNPs only.
-  - Output: sampleID.1KGP.snps.het.vcf.gz
+  - Output: `sampleID.1KGP.snps.het.vcf`
 
 - Alignment with WASP correction (STAR_ALIGNMENT_WASP)
   - Aligns reads using STAR with genotype-aware variant input
   - Applies WASP correction to mitigate reference mapping bias
   - Uses per-sample phased variants via `--varVCFfile`.
-  - Outputs coordinate sorted BAM files with WASP tags
+  - Output: `sampleID.Aligned.sortedByCoord.out.bam` (coordinate sorted BAM file with WASP tags)
 
 - Allele-specific read counting (ALLELE_COUNT)
   - Uses bcftools mpileup restricted to SNPs of interest.
@@ -127,7 +127,7 @@ The pipeline consists of the following main steps:
     - Mean mapping quality (MQ)
     - Base-quality–weighted summaries (QS, QSsum)
     - Computes variant allele fraction (VAF = ALT / (REF + ALT)).
-  - Output: sampleID.allele_counts.with_qual_and_vaf.tsv.gz
+  - Output: `sampleID.allele_counts.with_qual_and_vaf.tsv.gz`
 
 ## Customization
 
