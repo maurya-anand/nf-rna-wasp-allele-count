@@ -1,0 +1,11 @@
+name: base
+channels:
+  - bioconda
+  - conda-forge
+  - defaults
+dependencies:
+- star<=2.7.11b
+- samtools<=1.21
+- bcftools<=1.23
+- tabix<=1.11
+
