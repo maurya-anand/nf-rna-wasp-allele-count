@@ -1,10 +1,14 @@
 process STAR_ALIGNMENT_WASP {
+    publishDir "${params.outdir}/${meta.sampleid}/alignment", mode: 'copy'
+
     input:
     tuple val(meta), path(phased_1KGP_vcf), path(phased_1KGP_vcf_idx), path(star_index_dir), path(fastq_1), path(fastq_2)
+
     output:
     tuple val(meta), path("${meta.sampleid}.Aligned.sortedByCoord.out.bam"), path("${meta.sampleid}.Aligned.sortedByCoord.out.bam.bai"), emit: bam
     tuple val(meta), path("${meta.sampleid}.Log.final.out"), emit: log
     tuple val(meta), path("${meta.sampleid}.SJ.out.tab"), emit: sj_out
+
     script:
     """
     set -euo pipefail
