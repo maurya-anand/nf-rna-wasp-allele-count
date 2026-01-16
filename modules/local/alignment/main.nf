@@ -1,6 +1,6 @@
 process STAR_ALIGNMENT_WASP {
     input:
-    tuple val(meta), path(phased_1KGP_vcf), path(phased_1KGP_vcf_idx), path(star_index_dir)
+    tuple val(meta), path(phased_1KGP_vcf), path(phased_1KGP_vcf_idx), path(star_index_dir), path(fastq_1), path(fastq_2)
     output:
     tuple val(meta), path("${meta.sampleid}.Aligned.sortedByCoord.out.bam"), path("${meta.sampleid}.Aligned.sortedByCoord.out.bam.bai"), emit: bam
     tuple val(meta), path("${meta.sampleid}.Log.final.out"), emit: log
@@ -16,7 +16,7 @@ process STAR_ALIGNMENT_WASP {
     --genomeDir ${star_index_dir} \\
     --varVCFfile ${phased_1KGP_vcf} \\
     --waspOutputMode SAMtag \\
-    --readFilesIn ${meta.fastq_1} ${meta.fastq_2} \\
+    --readFilesIn ${fastq_1} ${fastq_2} \\
     --readFilesCommand zcat \\
     --outSAMtype BAM SortedByCoordinate \\
     --outSAMunmapped Within \\
