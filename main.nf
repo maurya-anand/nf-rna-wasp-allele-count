@@ -1,7 +1,7 @@
 #!/usr/bin/env nextflow
 
 nextflow.enable.dsl = 2
-include {ADAPTER_TRIM} from 'modules/local/adapter_trim'
+include {ADAPTER_TRIM} from './modules/local/adapter_trim'
 include { STAR_GENOME_INDEX } from './modules/local/index_genome'
 include { SUBSET_1KGP_VCF } from './modules/local/subset_1kgp'
 include { STAR_ALIGNMENT_WASP } from './modules/local/alignment'
