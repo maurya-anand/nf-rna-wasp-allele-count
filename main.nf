@@ -31,9 +31,9 @@ workflow {
     trimmed_reads_ch = ADAPTER_TRIM(reads_ch)
     vcf_ch = SUBSET_1KGP_VCF(vcf_ch_in)
     align_in_ch = vcf_ch.subset_phased_vcf
-        .join(trimmed_reads_ch.reads, by: 0)
+        .join(trimmed_reads_ch.reads)
         .combine(star_idx_ch.star_index_dir)
-        .map { _sampleid, vcf, meta, fq1, fq2, star_dir ->
+        .map { meta, vcf, fq1, fq2, star_dir ->
             [ meta, vcf, star_dir, fq1, fq2 ]
         }
     ac_in_ch = STAR_ALIGNMENT_WASP(align_in_ch)
