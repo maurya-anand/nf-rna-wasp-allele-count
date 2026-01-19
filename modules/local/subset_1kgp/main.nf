@@ -5,7 +5,7 @@ process SUBSET_1KGP_VCF {
     tuple val(meta), path(phased_vcf_dir)
 
     output:
-    tuple val(meta.sampleid), path("${meta.sampleid}.1KGP.snps.het.vcf"), emit: subset_phased_vcf
+    tuple val(meta), path("${meta.sampleid}.1KGP.snps.het.vcf"), emit: subset_phased_vcf
 
     script:
     """

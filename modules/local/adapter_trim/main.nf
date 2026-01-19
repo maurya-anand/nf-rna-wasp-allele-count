@@ -9,7 +9,7 @@ process ADAPTER_TRIM {
     output:
     tuple val(meta), path("${meta.sampleid}_1_trimmed.fq.gz"), path("${meta.sampleid}_2_trimmed.fq.gz"), emit: reads
     path "*_fastqc.{zip,html}", emit: fastqc
-    tuple path("*_trimming_report.txt"), emit: log
+    path("*_trimming_report.txt"), emit: log
 
     script:
     def fq1_base = fastq_1.toString().tokenize('.')[0]
