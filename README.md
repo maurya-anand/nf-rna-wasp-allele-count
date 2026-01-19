@@ -103,6 +103,10 @@ nextflow run main.nf -profile docker
 
 The pipeline consists of the following main steps:
 
+- Adapter removal (ADAPTER_TRIM)
+  - Used `trimgalore` to remove adapter sequences from the reads.
+  Output: trimmed reads and fastqc report.
+
 - Genome index generation (STAR_GENOME_INDEX)
   - Builds a STAR genome index from GRCh38 and GENCODE v38.
   - Executed once and reused across all samples.
