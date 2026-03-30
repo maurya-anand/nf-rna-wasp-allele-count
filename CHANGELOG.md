@@ -4,7 +4,8 @@ All notable changes to this project will be documented in this file.
 
 ## [1.0.1] - 2026-03-30
 
-- Conditional execution of alelle count process
+- Conditional execution of alelle count process.
+- Added pipeline execution report.
 
 ## [1.0.0] - 2026-01-19
 
