@@ -1,7 +1,7 @@
 #!/usr/bin/env nextflow
 
 nextflow.enable.dsl = 2
-include {ADAPTER_TRIM} from './modules/local/adapter_trim'
+include { ADAPTER_TRIM } from './modules/local/adapter_trim'
 include { STAR_GENOME_INDEX } from './modules/local/index_genome'
 include { SUBSET_1KGP_VCF } from './modules/local/subset_1kgp'
 include { STAR_ALIGNMENT_WASP } from './modules/local/alignment'
@@ -10,7 +10,7 @@ include { REPORT } from './modules/local/report'
 workflow {
     star_idx_ch = STAR_GENOME_INDEX(
         channel.fromPath(params.reference_fa),
-        channel.fromPath(params.gencode_gtf)
+        channel.fromPath(params.gencode_gtf),
     )
     reads_ch = channel.fromPath(params.sample_sheet)
         .splitCsv(header: true, sep: ",")
@@ -22,27 +22,27 @@ workflow {
         }
     vcf_ch_in = channel.fromPath(params.sample_sheet)
         .splitCsv(header: true, sep: ",")
-        .map { row -> 
+        .map { row ->
             def meta = [
                 sampleid: row.sample
             ]
             [meta, file(params.phased_vcf_dir)]
         }
-    regions_vcf_ch = channel.fromPath(params.regions_vcf, checkIfExists: true)
+    def regions_vcf_ch = params.regions_vcf ? channel.fromPath(params.regions_vcf, checkIfExists: true) : channel.empty()
     trimmed_reads_ch = ADAPTER_TRIM(reads_ch)
     vcf_ch = SUBSET_1KGP_VCF(vcf_ch_in)
     align_in_ch = vcf_ch.subset_phased_vcf
         .join(trimmed_reads_ch.reads)
         .combine(star_idx_ch.star_index_dir)
         .map { meta, vcf, fq1, fq2, star_dir ->
-            [ meta, vcf, star_dir, fq1, fq2 ]
+            [meta, vcf, star_dir, fq1, fq2]
         }
     ac_in_ch = STAR_ALIGNMENT_WASP(align_in_ch)
-    if (regions_vcf_ch) {
+    if (params.regions_vcf) {
         ALLELE_COUNT(
             ac_in_ch.bam,
             file(params.reference_fa),
-            regions_vcf_ch
+            regions_vcf_ch,
         )
     }
     report_in_ch = channel.empty()
