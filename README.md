@@ -12,7 +12,7 @@ A Nextflow DSL2 pipeline to perform allele-specific expression analysis from RNA
 ## Features
 
 - Genotype-aware RNA-seq alignment with **STAR + WASP correction**.
-- Allele-specific read counting (REF/ALT) from RNA-seq BAMs.
+- Optional allele-specific read counting (REF/ALT) from RNA-seq BAMs, performed only if a regions VCF is provided and exists.
 - Reports total depth and variant allele fraction.
 
 ## Requirements
@@ -68,9 +68,9 @@ reference/
 └── gencode.v38.annotation.gtf
 ```
 
-### 4. Define SNPs of interest (VCF)
+### 4. Define SNPs of interest (VCF) (optional)
 
-The pipeline expects a VCF so REF and ALT alleles are explicit.
+If you want to perform allele-specific counting, provide a VCF file with the SNPs of interest. If this file is not provided or does not exist, the allele counting step will be skipped.
 
 `query_sites.vcf`
 
@@ -123,7 +123,8 @@ The pipeline consists of the following main steps:
   - Uses per-sample phased variants via `--varVCFfile`.
   - Output: `sampleID.Aligned.sortedByCoord.out.bam` (coordinate sorted BAM file with WASP tags)
 
-- Allele-specific read counting (ALLELE_COUNT)
+- Allele-specific read counting (ALLELE_COUNT) (optional)
+  - This step is only executed if a regions VCF is provided as input.
   - Uses bcftools mpileup restricted to SNPs of interest.
   - Reports:
     - Total depth (DP)
