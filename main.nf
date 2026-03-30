@@ -28,6 +28,7 @@ workflow {
             ]
             [meta, file(params.phased_vcf_dir)]
         }
+    regions_vcf_ch = channel.fromPath(params.regions_vcf, checkIfExists: true)
     trimmed_reads_ch = ADAPTER_TRIM(reads_ch)
     vcf_ch = SUBSET_1KGP_VCF(vcf_ch_in)
     align_in_ch = vcf_ch.subset_phased_vcf
@@ -37,11 +38,13 @@ workflow {
             [ meta, vcf, star_dir, fq1, fq2 ]
         }
     ac_in_ch = STAR_ALIGNMENT_WASP(align_in_ch)
-    ALLELE_COUNT(
-        ac_in_ch.bam,
-        file(params.reference_fa),
-        file(params.regions_vcf)
-    )
+    if (regions_vcf_ch) {
+        ALLELE_COUNT(
+            ac_in_ch.bam,
+            file(params.reference_fa),
+            regions_vcf_ch
+        )
+    }
     report_in_ch = channel.empty()
     report_in_ch = report_in_ch.mix(trimmed_reads_ch.fastqc)
     report_in_ch = report_in_ch.mix(trimmed_reads_ch.log.map { log_file -> log_file[0] })
