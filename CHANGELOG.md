@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.0.1] - 2026-03-30
+
+- Conditional execution of alelle count process
+
 ## [1.0.0] - 2026-01-19
 
 ### Release Notes
