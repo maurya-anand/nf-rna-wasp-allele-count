@@ -7,6 +7,8 @@ include { SUBSET_1KGP_VCF } from './modules/local/subset_1kgp'
 include { STAR_ALIGNMENT_WASP } from './modules/local/alignment'
 include { ALLELE_COUNT } from './modules/local/allele_count'
 include { REPORT } from './modules/local/report'
+include { CHECK_FASTQ } from './modules/local/check_fastq'
+
 workflow {
     star_idx_ch = STAR_GENOME_INDEX(
         channel.fromPath(params.reference_fa),
@@ -20,6 +22,8 @@ workflow {
             ]
             [meta, file(row.fastq_1, checkIfExists: true), file(row.fastq_2, checkIfExists: true)]
         }
+        .groupTuple(by: 0)
+
     vcf_ch_in = channel.fromPath(params.sample_sheet)
         .splitCsv(header: true, sep: ",")
         .map { row ->
@@ -28,8 +32,11 @@ workflow {
             ]
             [meta, file(params.phased_vcf_dir)]
         }
+        .unique()
+
     def regions_vcf_ch = params.regions_vcf ? channel.fromPath(params.regions_vcf, checkIfExists: true) : channel.empty()
-    trimmed_reads_ch = ADAPTER_TRIM(reads_ch)
+    merged_reads_ch = CHECK_FASTQ(reads_ch)
+    trimmed_reads_ch = ADAPTER_TRIM(merged_reads_ch)
     vcf_ch = SUBSET_1KGP_VCF(vcf_ch_in)
     align_in_ch = vcf_ch.subset_phased_vcf
         .join(trimmed_reads_ch.reads)
