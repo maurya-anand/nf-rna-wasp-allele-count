@@ -25,10 +25,6 @@ process ADAPTER_TRIM {
         ${fastq_1} ${fastq_2}
     mv ${fq1_base}_val_1.fq.gz ${meta.sampleid}_1_trimmed.fq.gz
     mv ${fq2_base}_val_2.fq.gz ${meta.sampleid}_2_trimmed.fq.gz
-    mv ${fq1_base}_val_1_fastqc.html ${meta.sampleid}_1_val_1_fastqc.html
-    mv ${fq1_base}_val_1_fastqc.zip ${meta.sampleid}_1_val_1_fastqc.zip
-    mv ${fq2_base}_val_2_fastqc.html ${meta.sampleid}_2_val_2_fastqc.html
-    mv ${fq2_base}_val_2_fastqc.zip ${meta.sampleid}_2_val_2_fastqc.zip
     mv ${fastq_1}_trimming_report.txt ${meta.sampleid}_1_trimming_report.txt
     mv ${fastq_2}_trimming_report.txt ${meta.sampleid}_2_trimming_report.txt
     """
