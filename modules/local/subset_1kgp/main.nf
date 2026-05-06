@@ -9,6 +9,8 @@ process SUBSET_1KGP_VCF {
 
     script:
     """
+    export TMPDIR=${task.workDir}
+
     total_threads=${task.cpus}
 
     threads_per_job=\$(( total_threads > 4 ? 4 : total_threads ))
@@ -54,7 +56,7 @@ process SUBSET_1KGP_VCF {
         } > list.txt
 
         bcftools concat -f list.txt -Ou \\
-            | bcftools sort --temp-dir ./ -Ov -o ${meta.sampleid}.1KGP.snps.het.vcf
+            | bcftools sort --temp-dir ${task.workDir} -Ov -o ${meta.sampleid}.1KGP.snps.het.vcf
     else
         echo "Phased VCF dir is empty. Creating empty output files."
         touch ${meta.sampleid}.1KGP.snps.het.vcf

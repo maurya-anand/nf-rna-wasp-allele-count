@@ -12,6 +12,8 @@ process ALLELE_COUNT{
     script:
     """
     set -euo pipefail
+    
+    export TMPDIR=${task.workDir}
 
     [[ -f "${reference_fa}.fai" ]] || samtools faidx ${reference_fa}
 

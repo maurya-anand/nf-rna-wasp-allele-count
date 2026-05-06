@@ -13,7 +13,7 @@ process STAR_ALIGNMENT_WASP {
     script:
     """
     set -euo pipefail
-
+    export TMPDIR=${task.workDir}
     STAR \\
     --runMode alignReads \\
     --runThreadN ${task.cpus} \\
@@ -25,6 +25,7 @@ process STAR_ALIGNMENT_WASP {
     --readFilesCommand zcat \\
     --outSAMtype BAM SortedByCoordinate \\
     --outSAMunmapped Within \\
+    --outTmpDir ${task.workDir} \\
     --outFileNamePrefix ${meta.sampleid}. \\
     --outFilterMultimapNmax 20 \\
     --alignSJoverhangMin 8 \\
