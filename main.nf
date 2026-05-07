@@ -54,7 +54,7 @@ workflow {
     }
     report_in_ch = channel.empty()
     report_in_ch = report_in_ch.mix(trimmed_reads_ch.fastqc)
-    report_in_ch = report_in_ch.mix(trimmed_reads_ch.log.map { log_file -> log_file[0] })
+    report_in_ch = report_in_ch.mix(trimmed_reads_ch.log.flatten())
     report_in_ch = report_in_ch.mix(ac_in_ch.log.map { _meta, log_file -> log_file })
     report_in_ch = report_in_ch.mix(ac_in_ch.stats.map { _meta, log_file -> log_file })
     REPORT(report_in_ch.collect())
