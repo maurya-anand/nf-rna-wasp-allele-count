@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-## [1.0.2] - 2026-05-06
+## [1.0.2] - 2026-05-07
 
 - Fixed HPC profile
   - Added SLURM executor throttling (queueSize, submitRateLimit) for large-scale runs.
