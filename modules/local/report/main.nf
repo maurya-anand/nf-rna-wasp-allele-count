@@ -10,7 +10,7 @@ process REPORT {
 
     script:
     """
-    export TMPDIR=${task.workDir}
+    export TMPDIR=\$PWD
     multiqc --no-ai .
     """
 }

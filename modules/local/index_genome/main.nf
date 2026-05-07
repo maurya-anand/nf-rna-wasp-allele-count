@@ -9,7 +9,7 @@ process STAR_GENOME_INDEX {
     script:
     """
     set -euo pipefail
-    export TMPDIR=${task.workDir}
+    export TMPDIR=\$PWD
 
     mkdir -p STAR_INDEX
 
@@ -18,6 +18,6 @@ process STAR_GENOME_INDEX {
       --genomeDir STAR_INDEX \\
       --genomeFastaFiles ${ref_fa} \\
       --sjdbGTFfile ${gtf} \\
-      --outTmpDir ${task.workDir}/_STARgenomeTmp
+      --outTmpDir \$PWD/_STARgenomeTmp
     """
 }

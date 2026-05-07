@@ -16,7 +16,7 @@ process ADAPTER_TRIM {
     def fq2_base = fastq_2.toString().tokenize('.')[0]
     """
     set -euo pipefail
-    export TMPDIR=${task.workDir}
+    export TMPDIR=\$PWD
     total_threads=${task.cpus}
     trim_galore \
         --paired \
