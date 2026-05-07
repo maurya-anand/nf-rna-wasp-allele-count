@@ -1,4 +1,6 @@
 process STAR_ALIGNMENT_WASP {
+    tag "$meta.sampleid"
+
     publishDir "${params.outdir}/${meta.sampleid}/alignment", mode: 'copy'
 
     input:

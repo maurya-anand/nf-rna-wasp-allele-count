@@ -1,4 +1,6 @@
 process ALLELE_COUNT{
+    tag "$meta.sampleid"
+
     publishDir "${params.outdir}/${meta.sampleid}/allele_counts", mode: 'copy'
 
     input:

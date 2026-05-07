@@ -1,4 +1,6 @@
 process SUBSET_1KGP_VCF {
+    tag "$meta.sampleid"
+
     publishDir "${params.outdir}/${meta.sampleid}/extracted_1KGP_het_snps", mode: 'copy'
 
     input:
@@ -10,7 +12,7 @@ process SUBSET_1KGP_VCF {
     script:
     """
     export TMPDIR=\$PWD
-
+    mkdir -p sort_tmp
     total_threads=${task.cpus}
 
     threads_per_job=\$(( total_threads > 2 ? 2 : total_threads ))
@@ -56,7 +58,7 @@ process SUBSET_1KGP_VCF {
         } > list.txt
 
         bcftools concat --threads \${total_threads} -f list.txt -Ou \\
-            | bcftools sort --temp-dir \$PWD -Ov -o ${meta.sampleid}.1KGP.snps.het.vcf
+            | bcftools sort --temp-dir ./sort_tmp -Ov -o ${meta.sampleid}.1KGP.snps.het.vcf
     else
         echo "Phased VCF dir is empty. Creating empty output files."
         touch ${meta.sampleid}.1KGP.snps.het.vcf

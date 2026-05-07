@@ -1,7 +1,8 @@
 process ADAPTER_TRIM {
+    tag "$meta.sampleid"
+
     publishDir "${params.outdir}/${meta.sampleid}/fastqc", mode: 'copy', pattern: "*_fastqc.{zip,html}"
     publishDir "${params.outdir}/${meta.sampleid}/trim_galore", mode: 'copy', pattern: "*trimming_report.txt"
-
 
     input:
     tuple val(meta), path(fastq_1), path(fastq_2)
