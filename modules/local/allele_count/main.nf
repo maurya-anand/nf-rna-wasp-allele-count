@@ -17,7 +17,7 @@ process ALLELE_COUNT{
 
     [[ -f "${reference_fa}.fai" ]] || samtools faidx ${reference_fa}
 
-    bgzip -c ${regions_vcf} > sites.vcf.gz
+    bgzip -@ ${task.cpus} -c ${regions_vcf} > sites.vcf.gz
 
     tabix -p vcf sites.vcf.gz
 
@@ -29,6 +29,7 @@ process ALLELE_COUNT{
         -R sites.vcf.gz \\
         -a FORMAT/AD,FORMAT/DP \\
         -Ou ${bam} \\
+        --threads ${task.cpus} \\
     | bcftools call -m -Ou -o ${meta.sampleid}.vcf
     bcftools query -f '%CHROM\\t%POS\\t%REF\\t%ALT\\t[%DP]\\t[%AD]\\n' ${meta.sampleid}.vcf \\
     | awk -F '\\t' 'BEGIN{OFS="\\t"}

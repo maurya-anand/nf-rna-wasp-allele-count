@@ -25,7 +25,7 @@ process STAR_ALIGNMENT_WASP {
     --readFilesCommand zcat \\
     --outSAMtype BAM SortedByCoordinate \\
     --outSAMunmapped Within \\
-    --outTmpDir ${task.workDir} \\
+    --outTmpDir ${task.workDir}/_STARtmp \\
     --outFileNamePrefix ${meta.sampleid}. \\
     --outFilterMultimapNmax 20 \\
     --alignSJoverhangMin 8 \\
@@ -53,7 +53,7 @@ process STAR_ALIGNMENT_WASP {
     --chimMainSegmentMultNmax 1 \\
     --genomeLoad NoSharedMemory
 
-    samtools index ${meta.sampleid}.Aligned.sortedByCoord.out.bam
-    samtools stats ${meta.sampleid}.Aligned.sortedByCoord.out.bam > ${meta.sampleid}.samtools_stats.txt
+    samtools index -@ ${task.cpus} ${meta.sampleid}.Aligned.sortedByCoord.out.bam
+    samtools stats -@ ${task.cpus} ${meta.sampleid}.Aligned.sortedByCoord.out.bam > ${meta.sampleid}.samtools_stats.txt
     """
 }

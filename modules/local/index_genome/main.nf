@@ -18,6 +18,6 @@ process STAR_GENOME_INDEX {
       --genomeDir STAR_INDEX \\
       --genomeFastaFiles ${ref_fa} \\
       --sjdbGTFfile ${gtf} \\
-      --outTmpDir ${task.workDir}
+      --outTmpDir ${task.workDir}/_STARgenomeTmp
     """
 }
