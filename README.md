@@ -147,13 +147,15 @@ Resource requirements, containers, and execution profiles can be adjusted in:
 
 Tools:
 
-| Component | Version |
-|-----------|---------|
-| STAR      | 2.7.11b |
-| SAMTOOLS  | 1.21    |
-| BCFTOOLS  | 1.23    |
-| TABIX     | 1.11    |
+| Component   | Version |
+|-------------|---------|
+| STAR        | 2.7.11b |
+| SAMTOOLS    | 1.21    |
+| BCFTOOLS    | 1.23    |
+| TABIX       | 1.11    |
+| trim-galore | 2.1.0   |
+| multiqc     | 1.34    |
 
 Container Image:
 
-- `community.wave.seqera.io/library/bcftools_samtools_star_tabix:e294cd9e3fb171ce`
+- `ghcr.io/maurya-anand/nf-rna-wasp-allele-count`
