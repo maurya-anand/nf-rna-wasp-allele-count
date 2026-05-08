@@ -45,7 +45,7 @@ process STAR_ALIGNMENT_WASP {
     --outSAMstrandField intronMotif \\
     --outFilterIntronMotifs None \\
     --alignSoftClipAtReferenceEnds Yes \\
-    --quantMode GeneCounts \\
+    --quantMode TranscriptomeSAM GeneCounts \\
     --outSAMattrRGline ID:${meta.sampleid} SM:${meta.sampleid} \\
     --outSAMattributes NH HI AS nM NM ch \\
     --chimOutJunctionFormat 0 \\
