@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-## [1.0.2] - 2026-05-07
+## [1.0.2] - 2026-05-08
 
 - Fixed HPC profile
   - Added SLURM executor throttling (queueSize, submitRateLimit) for large-scale runs.
@@ -10,6 +10,9 @@ All notable changes to this project will be documented in this file.
   - Added scratch support for node-local I/O performance.
   - Capped memory and CPU resources with Math.min() to prevent exceeding node limits.
   - Removed redundant executor and queue declarations from process selectors.
+- Updated
+  - Trim Galore v2 wihich is implemented in Rust and runs faster than the older v0.6.x.
+  - MultiQC v1.34
 
 ## [1.0.1] - 2026-03-30
 
